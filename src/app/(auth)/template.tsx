@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ReactNode } from "react";
+import { ReactNode,useState } from "react";
 import './styles.css'
 
 type Props = {
@@ -14,10 +14,13 @@ const navLinks = [
   { name: "Forgot Password", href: "/forgot-password" },
 ];
 export default function AuthLayout({ children }: Props) {
+  const [input,setInput] = useState('');
   const pathname = usePathname();
   return (
     <>
+      
       <div>
+        <input type="text" placeholder="enter here" onChange={(e)=>setInput(e.target.value)}/>
         {navLinks.map((link) => {
           const isActive = pathname.startsWith(link.href);
           return (
