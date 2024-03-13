@@ -11,7 +11,7 @@ export async function GET(_request:Request, {params}:Params  ){
     return  Response.json(comment);
 }
 
-export async function PATCH(request:Request, {params}:Params  ){
+export async function PATCH(request:Request, {params}:Params){
    
     const body = await request.json();
     const {text} = body;
@@ -19,4 +19,12 @@ export async function PATCH(request:Request, {params}:Params  ){
     comments[index].text = text;
 
     return  Response.json(comments[index]);
+}
+
+export async function DELETE(request:Request, {params}:Params  ){
+   
+    const index = comments.findIndex(comment => comment.id === parseInt(params.id));
+    const deletedComment = comments[index];
+    comments.splice(index,1);
+    return  Response.json(deletedComment);
 }
